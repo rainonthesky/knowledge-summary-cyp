@@ -1,0 +1,23 @@
+server:
+  port: 8030
+
+spring:
+  application:
+    name: ms-registry
+
+# 配置 Eureka Server 注册中心
+eureka:
+  instance:
+    hostname: ms-registry
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5 #5秒钟获取一次心跳
+    server:
+      eviction-interval-timer-in-ms: 400 #4秒后清除不可用的的服务
+      enable-self-preservation: false #关闭自我保护机制
+      renewalPercentThreshold: 0.9
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://192.168.80.73:8030/eureka/

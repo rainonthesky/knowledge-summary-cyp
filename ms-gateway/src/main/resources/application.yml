@@ -1,0 +1,26 @@
+server:
+  port: 8031
+
+spring:
+  application:
+    name: ms-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启配置注册中心进行路由功能
+          lower-case-service-id: true # 将服务名称转小写
+#      routes:
+#        - id: ms-diners
+#          uri: lb://ms-diners
+#          predicates:
+#            - Path=/hello/**
+
+# 配置 Eureka Server 注册中心
+eureka:
+  instance:
+    prefer-ip-address: true #显示注册的地址
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://192.168.80.73:8030/eureka/

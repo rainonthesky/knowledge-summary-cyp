@@ -1,0 +1,13 @@
+server:
+  port: 8033
+
+spring:
+  application:
+    name: ms-diners
+eureka:
+  instance:
+    prefer-ip-address: true #ÏÔÊ¾×¢²áµÄµØÖ·
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://192.168.80.73:8030/eureka/
